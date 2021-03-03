@@ -8,7 +8,7 @@ app.on('ready', () => {
   win = new BrowserWindow({
     contextIsolation: true,
     icon: __dirname + '/img/logo.png',
-    frame: false,
+    //frame: false,
   });
 
   win.setMenu(null);
