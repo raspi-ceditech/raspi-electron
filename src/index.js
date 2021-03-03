@@ -13,7 +13,7 @@ app.on('ready', () => {
 
   win.setMenu(null);
   //win.on('unmaximize', () => win.maximize());
-  win.setResizable(false);
+  //win.setResizable(false);
   win.maximize();
   win.loadURL('http://127.0.0.1:8000/');
 });
