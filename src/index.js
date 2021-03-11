@@ -15,7 +15,7 @@ app.on('ready', () => {
   win.on('unmaximize', () => win.maximize());
   //win.setResizable(false);
   win.maximize();
-  win.loadURL('http://localhost/');
+  win.loadURL('http://127.0.0.1:8000/');
 });
 
 
