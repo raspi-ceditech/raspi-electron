@@ -7,7 +7,7 @@ let win = null;
 app.on('ready', () => {
   win = new BrowserWindow({
     contextIsolation: true,
-    icon: __dirname + '/img/logo.png',
+    icon: __dirname + '/img/icono_raspi.png',
     //frame: false,
   });
 
