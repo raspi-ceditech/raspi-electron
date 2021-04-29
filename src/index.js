@@ -4,6 +4,10 @@ const { app, BrowserWindow } = require('electron');
 
 let win = null;
 
+app.on('browser-window-created', function (e, window) {
+  window.setMenu(null);
+});
+
 app.on('ready', () => {
   win = new BrowserWindow({
     contextIsolation: true,
@@ -17,5 +21,4 @@ app.on('ready', () => {
   win.maximize();
   win.loadURL('http://127.0.0.1:8000/');
 });
-
 
