@@ -6,6 +6,10 @@ const url = process.argv.pop()
 
 let win = null;
 
+app.on('browser-window-created', function (e, window) {
+  window.setMenu(null);
+});
+
 app.on('ready', () => {
   win = new BrowserWindow({
     contextIsolation: true,
@@ -15,5 +19,5 @@ app.on('ready', () => {
   win.maximize();
   //win.on('unmaximize', () => win.maximize());
   //win.setResizable(false);
-  win.loadURL(url);
+  win.loadURL(url, { extraHeaders : 'pragma: no-cache\n' });
 });

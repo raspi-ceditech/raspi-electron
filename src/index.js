@@ -11,6 +11,7 @@ app.on('browser-window-created', function (e, window) {
 app.on('ready', () => {
   win = new BrowserWindow({
     contextIsolation: true,
+    title:'Raspi',
     icon: __dirname + '/img/icono_raspi.png',
     //frame: false,
   });
@@ -19,6 +20,5 @@ app.on('ready', () => {
   win.on('unmaximize', () => win.maximize());
   //win.setResizable(false);
   win.maximize();
-  win.loadURL('http://127.0.0.1:8000/');
+  win.loadURL('http://127.0.0.1:8000/', { extraHeaders : 'pragma: no-cache\n' });
 });
-
