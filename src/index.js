@@ -4,6 +4,10 @@ const { app, BrowserWindow } = require('electron');
 
 let win = null;
 
+/** Deshabilita la cache */
+app.commandLine.appendSwitch('disable-http-cache');
+
+/** Deshabilita el menú en las ventanas hijas de la principal */
 app.on('browser-window-created', function (e, window) {
   window.setMenu(null);
 });
