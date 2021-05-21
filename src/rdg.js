@@ -6,17 +6,19 @@ const url = process.argv.pop()
 
 let win = null;
 
-
+/** Deshabilita la cache */
 app.commandLine.appendSwitch('disable-http-cache');
 
+/** Deshabilita el menú en las ventanas hijas de la principal */
 app.on('browser-window-created', function (e, window) {
   window.setMenu(null);
 });
 
 app.on('ready', () => {
   win = new BrowserWindow({
-    title: 'WebApps',
-    icon: __dirname + '/img/icono_raspi.png',
+    title: 'RD Gateway',
+    icon: __dirname + '/img/microsoft_icon.png',
+    //frame: false,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
