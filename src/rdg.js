@@ -21,7 +21,7 @@ app.on('browser-window-created', function (e, window) {
 
 app.on('ready', () => {
 
-  cp.spawnSync('xrandr --output HDMI-1 --mode 800x600');
+  cp.execSync('xrandr --output HDMI-1 --mode 800x600');
 
   win = new BrowserWindow({
     title: 'RD Gateway',
@@ -40,7 +40,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  cp.spawnSync('xrandr --output HDMI-1 --mode 1024x768');
+  cp.execSync('xrandr --output HDMI-1 --mode 1024x768');
   app.quit()
 })
 
