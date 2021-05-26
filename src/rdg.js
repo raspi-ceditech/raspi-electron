@@ -8,13 +8,6 @@ const url = process.argv.pop()
 let win = null;
 
 
-function poner_resolucion_rendimiento() {
-  code = cp.spawnSync('xrandr --output HDMI-1 --mode 800x600');
-}
-
-function poner_resolucion_original(){
-  code = cp.spawnSync('xrandr --output HDMI-1 --mode 1024x768');
-}
 
 
 
@@ -28,7 +21,7 @@ app.on('browser-window-created', function (e, window) {
 
 app.on('ready', () => {
 
-  poner_resolucion_rendimiento();
+  code = cp.spawnSync('xrandr --output HDMI-1 --mode 800x600');
 
   win = new BrowserWindow({
     title: 'RD Gateway',
@@ -47,7 +40,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  poner_resolucion_original();
+  code = cp.spawnSync('xrandr --output HDMI-1 --mode 1024x768');
   app.quit()
 })
 
