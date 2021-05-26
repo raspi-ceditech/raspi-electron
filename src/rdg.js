@@ -1,7 +1,7 @@
 'use strict';
 
 const { app, BrowserWindow } = require('electron');
-const execSync = require('child_process').execSync;
+const spawnSync = require('child_process').spawnSync;
 
 const url = process.argv.pop()
 
@@ -42,9 +42,9 @@ app.on('window-all-closed', () => {
 
 
 function poner_resolucion_rendimiento() {
-  code = execSync('xrandr --output HDMI-1 --mode 800x600');
+  code = spawnSync('xrandr --output HDMI-1 --mode 800x600');
 }
 
 function poner_resolucion_original(){
-  code = execSync('xrandr --output HDMI-1 --mode 1024x768');
+  code = spawnSync('xrandr --output HDMI-1 --mode 1024x768');
 }
