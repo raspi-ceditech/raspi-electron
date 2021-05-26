@@ -7,6 +7,17 @@ const url = process.argv.pop()
 
 let win = null;
 
+
+function poner_resolucion_rendimiento() {
+  code = cp.spawnSync('xrandr --output HDMI-1 --mode 800x600');
+}
+
+function poner_resolucion_original(){
+  code = cp.spawnSync('xrandr --output HDMI-1 --mode 1024x768');
+}
+
+
+
 /** Deshabilita la cache */
 app.commandLine.appendSwitch('disable-http-cache');
 
@@ -40,11 +51,3 @@ app.on('window-all-closed', () => {
   app.quit()
 })
 
-
-function poner_resolucion_rendimiento() {
-  code = cp.spawnSync('xrandr --output HDMI-1 --mode 800x600');
-}
-
-function poner_resolucion_original(){
-  code = cp.spawnSync('xrandr --output HDMI-1 --mode 1024x768');
-}
