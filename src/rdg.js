@@ -36,7 +36,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  poner_resolucion();
+  poner_resolucion_original();
   app.quit()
 })
 
