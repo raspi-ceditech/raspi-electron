@@ -1,6 +1,7 @@
 'use strict';
 
 const { app, BrowserWindow } = require('electron');
+const execSync = require('child_process').execSync;
 
 const url = process.argv.pop()
 
@@ -30,3 +31,15 @@ app.on('ready', () => {
   win.maximize();
   win.loadURL(url, { extraHeaders: 'pragma: no-cache\n' });
 });
+
+app.on('window-all-closed', () => {
+  poner_resolucion();
+  app.quit()
+})
+
+
+
+
+function poner_resolucion(){
+  code = execSync('xrandr --output HDMI-1 --mode 1024x768');
+}
