@@ -16,6 +16,9 @@ app.on('browser-window-created', function (e, window) {
 });
 
 app.on('ready', () => {
+
+  poner_resolucion_rendimiento();
+
   win = new BrowserWindow({
     title: 'RD Gateway',
     icon: __dirname + '/img/microsoft_icon.png',
@@ -38,8 +41,10 @@ app.on('window-all-closed', () => {
 })
 
 
+function poner_resolucion_rendimiento() {
+  code = execSync('xrandr --output HDMI-1 --mode 800x600');
+}
 
-
-function poner_resolucion(){
+function poner_resolucion_original(){
   code = execSync('xrandr --output HDMI-1 --mode 1024x768');
 }
