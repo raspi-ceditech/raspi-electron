@@ -3,6 +3,8 @@
 const { app, BrowserWindow } = require('electron');
 const path = require("path");
 const windowLock = app.requestSingleInstanceLock();
+require("./tareas")
+
 
 let win = null;
 
@@ -35,8 +37,13 @@ if (!windowLock) {
       icon: __dirname + '/img/icono_raspi.png',
       //frame: false,
       webPreferences: {
+        nodeIntegration:false,
         contextIsolation: true,
+        enableRemoteModule:false,
+        preload: path.join(__dirname, 'preload.js')
       },
+      minWidth:800,
+      minHeight:540,
     });
 
 
@@ -48,8 +55,7 @@ if (!windowLock) {
 
     /* Set did-fail-load listener once */
     win.webContents.on("did-fail-load", function() {
-      win.loadFile(path.join(__dirname, '/prueba.html'));
+      win.loadFile(path.join(__dirname, '/mensaje_error.html'));
     });
   });
-
 }

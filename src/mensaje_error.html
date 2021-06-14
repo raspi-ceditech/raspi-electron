@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-sm-8">
+                <div class="row justify-content-center">
+                    <img src="img/icon.png"
+                    class="img-fluid" style="height:250px">
+
+                </div>
+                <div class="row justify-content-center m-3">
+                    <h4>Hemos tenido un problema.</h4>
+                </div>   
+                <div class="row justify-content-center m-1">
+                    <button id="reiniciar" class="btn btn-primary">Reiniciar</button>
+                </div>                    
+        </div>
+    </div>
+</body>
+
+<script>
+    "use strict";
+    const btn_reiniciar = document.getElementById('reiniciar');
+
+    btn_reiniciar.addEventListener('click', function () {
+        btn_reiniciar.disabled = true;
+        window.api.send("reiniciar");
+    });
+
+
+</script>
+
+</html>
