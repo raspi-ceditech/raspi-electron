@@ -1,5 +1,5 @@
 'use strict';
-
+const fs = require('fs')
 const { app, BrowserWindow } = require('electron');
 const path = require("path");
 const windowLock = app.requestSingleInstanceLock();
@@ -32,8 +32,11 @@ if (!windowLock) {
   });
 
   app.on('ready', () => {
+
+    let version = getVersion();
+
     win = new BrowserWindow({
-      title: 'Raspi',
+      title: 'Raspi V'+version,
       icon: __dirname + '/img/icono_raspi.png',
       //frame: false,
       webPreferences: {
@@ -58,4 +61,12 @@ if (!windowLock) {
       win.loadFile(path.join(__dirname, '/mensaje_error.html'));
     });
   });
+}
+
+
+
+
+function getVersion() {
+  const data = fs.readFileSync('/var/www/html/raspi/util/actualizacion/version.txt', 'utf8');
+  return data
 }
