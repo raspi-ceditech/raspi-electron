@@ -1,7 +1,7 @@
 
 "use strict";
 //Dependencias necesitadas por tareas.js
-const { ipcMain, dialog } = require('electron');
+const { app, ipcMain, dialog } = require('electron');
 const child_process = require('child_process');
 
 //RUTAS
@@ -19,11 +19,19 @@ module.exports = {
 
 }
 
+
+
 function reiniciar(event, callback) {
-    ejecutar_comando("sh /var/www/html/raspi/util/actualizacion/atualizaciones/run_server.sh")
+    ejecutar_comando("sh /var/www/html/raspi/util/actualizacion/atualizaciones/run_server.sh",
+    setTimeout(reload,3000))
+        
 }
 
 
+function reload(){
+    app.relaunch()
+    app.exit()
+}
 
 function ejecutar_comando(comando, callback) {
     var child = child_process.spawn(comando, {
@@ -48,6 +56,7 @@ function ejecutar_comando(comando, callback) {
         switch (code) {
             case 0:
                 if (typeof callback === 'function') {
+                    
                     callback();
                 }
                 break;
