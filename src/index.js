@@ -1,6 +1,7 @@
 'use strict';
 
 const { app, BrowserWindow } = require('electron');
+const path = require("path");
 const windowLock = app.requestSingleInstanceLock();
 
 let win = null;
@@ -38,11 +39,17 @@ if (!windowLock) {
       },
     });
 
+
     win.setMenu(null);
     win.on('unmaximize', () => win.maximize());
     //win.setResizable(false);
     win.maximize();
     win.loadURL('http://127.0.0.1:8000/', { extraHeaders: 'pragma: no-cache\n' });
+
+    /* Set did-fail-load listener once */
+    win.webContents.on("did-fail-load", function() {
+      win.loadFile(path.join(__dirname, '/prueba.html'));
+    });
   });
 
 }
