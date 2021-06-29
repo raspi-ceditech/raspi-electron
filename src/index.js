@@ -1,9 +1,9 @@
 'use strict';
-const fs = require('fs')
-const { app, BrowserWindow } = require('electron');
+
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require("path");
 const windowLock = app.requestSingleInstanceLock();
-require("./tareas")
+const {getVersion} = require("./tareas")
 
 
 let win = null;
@@ -49,8 +49,9 @@ if (!windowLock) {
       minHeight:540,
     });
 
+    construirMenu(win);
+    
 
-    win.setMenu(null);
     win.on('unmaximize', () => win.maximize());
     //win.setResizable(false);
     win.maximize();
@@ -64,9 +65,27 @@ if (!windowLock) {
 }
 
 
+function construirMenu(win){
+  const temple = [
+    {
+      label:"paginas", 
+      submenu:[
+        {
+          label : "principal",
+          click: function(){
+            win.loadURL('http://127.0.0.1:8000/', { extraHeaders: 'pragma: no-cache\n' });
+          }
+        },
+        {
+          label : "soporte",
+          click: function(){
+            win.loadFile(path.join(__dirname, '/soporte/views/index.html'));
+          }
+        }
+      ]
+    }
 
-
-function getVersion() {
-  const data = fs.readFileSync('/var/www/html/raspi/util/actualizacion/version.txt', 'utf8');
-  return data
+  ]
+  const menu = Menu.buildFromTemplate(temple);
+  Menu.setApplicationMenu(menu);
 }

@@ -2,7 +2,7 @@
 
 const {ipcRenderer, contextBridge} = require("electron");
 
-const validChannels = ["reiniciar"];
+const validChannels = ["reiniciar","forzar_actualizacion","get_version"];
 const validChannelsRTA = validChannels.map(ch =>{
     return ch+"_rta"
 });
