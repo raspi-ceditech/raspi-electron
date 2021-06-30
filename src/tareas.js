@@ -34,7 +34,7 @@ module.exports = {
 
 function forzar_actualizacion(event, callback) {
     ejecutar_matar_python(
-        ejecutar_git_restore(
+        ejecutar_git_reset(
             ejecutar_rm_version(
                 ejecutar_actualizacion(callback))));
 }
@@ -49,8 +49,8 @@ function ejecutar_rm_version(callback) {
     ejecutar_comando(comando, callback);
 }
 
-function ejecutar_git_restore(callback) {
-    let comando = `cd ${ruta_raspi} && git restore .`
+function ejecutar_git_reset(callback) {
+    let comando = `cd ${ruta_raspi} && git reset --hard`
     ejecutar_comando(comando, callback);
 
 }
