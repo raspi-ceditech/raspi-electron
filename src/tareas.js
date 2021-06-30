@@ -105,12 +105,12 @@ function ejecutar_comando(comando, callback) {
     child.stdout.on('data', (data) => {
         //Here is the output
         data = data.toString();
-        console.log("electron captura stdout= \n" + data);
+        logger("electron captura stdout= \n" + data);
     });
 
     child.stderr.setEncoding('utf8');
     child.stderr.on('data', (data) => {
-        console.log("electron captura stderr= \n" + data);
+        logger("electron captura stderr= \n" + data);
     });
 
     child.on('close', (code) => {
@@ -156,12 +156,12 @@ function ejecutar_actualizacion(callback){
     child.stdout.on('data', (data) => {
         //Here is the output
         data=data.toString();   
-        console.log("electron captura stdout= \n"+data);      
+        logger("electron captura stdout= \n"+data);      
     });
 
     child.stderr.setEncoding('utf8');
     child.stderr.on('data', (data) => {
-        console.log("electron captura stderr= \n"+data);
+        logger("electron captura stderr= \n"+data);
     });
 
     child.on('close', (code) => {
