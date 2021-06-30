@@ -57,8 +57,29 @@ function ejecutar_git_restore(callback) {
 
 
 function version() {
-    const data = fs.readFileSync('/var/www/html/raspi/util/actualizacion/version.txt', 'utf8');
-    return data
+    let data;
+    try{
+        data = fs.readFileSync('/var/www/html/raspi/util/actualizacion/version.txt', 'utf8');
+    }catch (err){
+        if (err.code == 'ENOENT'){
+            data = " version no detectada";
+        }else{
+            data = " error desconocido";
+            logger(err.toString());
+        }
+    }
+    return data;
+}
+
+
+function logger(err){
+    let newDate = new Date(Date.now());
+    const log = `${newDate.toDateString()} ${newDate.toTimeString()}`+"\n"+err+"\n";
+    fs.appendFile('/var/log/raspi/electron.log', log, (err)=>{
+        if (err){
+            throw err;
+        } 
+    });    
 }
 
 
