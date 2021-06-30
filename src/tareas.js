@@ -45,8 +45,7 @@ function ejecutar_matar_python(callback) {
 }
 
 function ejecutar_rm_version(callback) {
-    logger("entre a rm");
-    let comando = `cd ${ruta_actualizacion} && rm version.txt`
+    let comando = `cd ${ruta_actualizacion} && rm -f version.txt`
     ejecutar_comando(comando, callback);
 }
 
@@ -137,7 +136,6 @@ function ejecutar_comando(comando, callback) {
 
 
 function ejecutar_actualizacion(callback){
-    logger("entre a actualizar")
     let comando = `cd ${ruta_actualizacion} && python3`
 
     var child = child_process.spawn(comando, [ruta_actualizacion+"actualizacion.py"], {
