@@ -33,26 +33,15 @@ module.exports = {
 }
 
 function forzar_actualizacion(event, callback) {
-    ejecutar_matar_python(
-        ejecutar_git_reset(
-            ejecutar_rm_version(
-                ejecutar_actualizacion(callback))));
-}
-
-function ejecutar_matar_python(callback) {
-    let comando = `killall python3`
-    ejecutar_comando(comando, callback);
-}
-
-function ejecutar_rm_version(callback) {
-    let comando = `cd ${ruta_actualizacion} && rm -f version.txt`
-    ejecutar_comando(comando, callback);
-}
-
-function ejecutar_git_reset(callback) {
-    let comando = `cd ${ruta_raspi} && git reset --hard`
-    ejecutar_comando(comando, callback);
-
+    // primero se mata python, git reset, rm version, actualizar
+    ejecutar_comando("killall -q python3 || true",()=>{
+        ejecutar_comando(`cd ${ruta_raspi} && git reset --hard`, ()=>{
+            ejecutar_comando(`cd ${ruta_actualizacion} && rm -f version.txt`, ()=>{
+                ejecutar_actualizacion(callback);
+            });
+        });
+    });
+    
 }
 
 
@@ -75,11 +64,12 @@ function version() {
 function logger(err){
     let newDate = new Date(Date.now());
     const log = `${newDate.toDateString()} ${newDate.toTimeString()}`+"\n"+err+"\n";
-    fs.appendFile('/var/log/raspi/electron.log', log, (err)=>{
-        if (err){
-            throw err;
-        } 
-    });    
+    fs.appendFileSync('/var/log/raspi/electron.log', log);
+    // , (err)=>{
+    //     if (err){
+    //         throw err;
+    //     } 
+    // }
 }
 
 
@@ -118,7 +108,7 @@ function ejecutar_comando(comando, callback) {
         switch (code) {
             case 0:
                 if (typeof callback === 'function') {
-
+                    logger("log callback= "+callback.toString());
                     callback();
                 }
                 break;
