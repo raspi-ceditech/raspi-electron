@@ -17,7 +17,7 @@ app.on('browser-window-created', function (e, window) {
 app.on('ready', () => {
   win = new BrowserWindow({
     title: 'WebApps',
-    icon: __dirname + '/img/icono_raspi.png',
+    icon: __dirname + '/img/citrix.png',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
