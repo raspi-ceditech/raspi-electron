@@ -1,8 +1,9 @@
 'use strict';
 
 const { app, BrowserWindow } = require('electron');
-
+const child_process = require('child_process');
 const url = process.argv.pop()
+const fs = require('fs');
 
 let win = null;
 
@@ -28,11 +29,12 @@ app.on('ready', () => {
   win.maximize();
   win.loadURL(url, { extraHeaders: 'pragma: no-cache\n' });
 
-  win.webContents.on('did-finish-load', () => {
-
     win.webContents.session.on('will-download', (event, item, webContents) => {
+
+      console.log("tamaño total= "+item.getTotalBytes());
       // Set the save path, making Electron not to prompt a save dialog.
-      item.setSavePath('/tmp/save.ica');
+      let nombre_archivo='/tmp/'+item.getFilename(); 
+      item.setSavePath(nombre_archivo);
 
       item.on('updated', (event, state) => {
         if (state === 'interrupted') {
@@ -48,20 +50,27 @@ app.on('ready', () => {
       item.once('done', (event, state) => {
         if (state === 'completed') {
           console.log('Download successfully')
-          comando = "";
-          ejecutar_comando()
+          let comando = "/opt/Citrix/ICAClient/wfica "+nombre_archivo;
+          console.log("tamaño total en ejecutar= "+item.getTotalBytes());
+          
+          ejecutar_comando(comando, null);
         } else {
           console.log(`Download failed: ${state}`)
         }
       });
     });
   });
-});
 
 
 
 
 
+
+function logger(err){
+  let newDate = new Date(Date.now());
+  const log = `${newDate.toDateString()} ${newDate.toTimeString()}`+"\n"+err+"\n";
+  fs.appendFileSync('/var/log/raspi/electron_main_citrix.log', log);
+}
 
 
 function ejecutar_comando(comando, callback) {
@@ -90,15 +99,7 @@ function ejecutar_comando(comando, callback) {
                   logger("log callback= "+callback.toString());
                   callback();
               }
-              break;
-          default:
-              dialog.showMessageBox({
-                  title: 'Fallo actualizacion',
-                  type: 'warning',
-                  message: 'Ocurrio un error en la actualizacion\nse grabaron los reportes\r\n'
-              });
-              break;
-      }
 
+      }
   });
 }
