@@ -68,16 +68,16 @@ if (!windowLock) {
 function construirMenu(win){
   const temple = [
     {
-      label:"paginas", 
+      label:"Opciones", 
       submenu:[
         {
-          label : "principal",
+          label : "raSpi",
           click: function(){
             win.loadURL('http://127.0.0.1:8000/', { extraHeaders: 'pragma: no-cache\n' });
           }
         },
         {
-          label : "soporte",
+          label : "Soporte",
           click: function(){
             win.loadFile(path.join(__dirname, '/soporte/views/index.html'));
           }
