@@ -1,8 +1,9 @@
 'use strict';
 
 const { app, BrowserWindow } = require('electron');
-
+const child_process = require('child_process');
 const url = process.argv.pop()
+const fs = require('fs');
 
 let win = null;
 
@@ -16,7 +17,7 @@ app.on('browser-window-created', function (e, window) {
 app.on('ready', () => {
   win = new BrowserWindow({
     title: 'WebApps',
-    icon: __dirname + '/img/icono_raspi.png',
+    icon: __dirname + '/img/citrix.png',
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -27,4 +28,5 @@ app.on('ready', () => {
   win.setMenu(null);
   win.maximize();
   win.loadURL(url, { extraHeaders: 'pragma: no-cache\n' });
+
 });
