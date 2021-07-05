@@ -48,6 +48,8 @@ app.on('ready', () => {
       item.once('done', (event, state) => {
         if (state === 'completed') {
           console.log('Download successfully')
+          comando = "";
+          ejecutar_comando()
         } else {
           console.log(`Download failed: ${state}`)
         }
@@ -55,3 +57,48 @@ app.on('ready', () => {
     });
   });
 });
+
+
+
+
+
+
+
+function ejecutar_comando(comando, callback) {
+  var child = child_process.spawn(comando, {
+      encoding: 'utf8',
+      shell: true
+  });
+
+  child.stdout.setEncoding('utf8');
+  child.stdout.on('data', (data) => {
+      //Here is the output
+      data = data.toString();
+      logger("electron captura stdout= \n" + data);
+  });
+
+  child.stderr.setEncoding('utf8');
+  child.stderr.on('data', (data) => {
+      logger("electron captura stderr= \n" + data);
+  });
+
+  child.on('close', (code) => {
+      //Here you can get the exit code of the script  
+      switch (code) {
+          case 0:
+              if (typeof callback === 'function') {
+                  logger("log callback= "+callback.toString());
+                  callback();
+              }
+              break;
+          default:
+              dialog.showMessageBox({
+                  title: 'Fallo actualizacion',
+                  type: 'warning',
+                  message: 'Ocurrio un error en la actualizacion\nse grabaron los reportes\r\n'
+              });
+              break;
+      }
+
+  });
+}
