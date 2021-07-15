@@ -51,6 +51,7 @@ app.on('ready', () => {
         if (state === 'completed') {
           console.log('Download successfully')
           let comando = "/opt/Citrix/ICAClient/wfica "+nombre_archivo;
+          let comando = "xdg-open "+nombre_archivo;
           console.log("tamaño total en ejecutar= "+item.getTotalBytes());
           
           ejecutar_comando(comando, null);
