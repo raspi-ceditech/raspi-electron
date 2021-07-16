@@ -1,6 +1,7 @@
 'use strict';
 
 const { app, BrowserWindow, Menu } = require('electron');
+const child_process = require('child_process');
 const path = require("path");
 const windowLock = app.requestSingleInstanceLock();
 const {getVersion} = require("./tareas")
@@ -50,7 +51,11 @@ if (!windowLock) {
     });
 
     construirMenu(win);
-    
+    let comando_pulseaudio = "pulseaudio --check || pulseaudio --start"
+    child_process.spawn(comando_pulseaudio, {
+      encoding: 'utf8',
+      shell: true
+  });
 
     win.on('unmaximize', () => win.maximize());
     //win.setResizable(false);
