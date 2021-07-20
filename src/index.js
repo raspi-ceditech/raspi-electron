@@ -51,7 +51,8 @@ if (!windowLock) {
     });
 
     construirMenu(win);
-    let comando_pulseaudio = "bash /opt/raspi-electron/src/pulseaudio.bash"
+
+    let comando_pulseaudio = "pulseaudio --start"
     child_process.spawn(comando_pulseaudio, {
       encoding: 'utf8',
       shell: true
