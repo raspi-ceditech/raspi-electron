@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron --no-sandbox src/index.js",
     "citrix": "electron --no-sandbox src/citrix.js",
+    "webapps": "electron --no-sandbox src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
