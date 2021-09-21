@@ -37,7 +37,9 @@ function forzar_actualizacion(event, callback) {
     ejecutar_comando("killall -q python3 || true",()=>{
         ejecutar_comando(`cd ${ruta_raspi} && git reset --hard`, ()=>{
             ejecutar_comando(`cd ${ruta_actualizacion} && rm -f version.txt`, ()=>{
-                ejecutar_actualizacion(callback);
+                ejecutar_comando("pip3 install psycopg2", ()=>{
+                    ejecutar_actualizacion(callback);
+                });
             });
         });
     });
