@@ -76,7 +76,7 @@ function logger(err){
 
 
 function reiniciar(event, callback) {
-    ejecutar_comando("sh /var/www/html/raspi/util/actualizacion/atualizaciones/run_server.sh",
+    ejecutar_comando("sh /var/www/html/raspi/util/actualizacion/actualizaciones/run_server.sh",
         setTimeout(reload, 3000))
 
 }
