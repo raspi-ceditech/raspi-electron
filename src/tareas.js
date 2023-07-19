@@ -5,7 +5,7 @@ const { app, ipcMain, dialog } = require('electron');
 const child_process = require('child_process');
 const fs = require('fs');
 
-//RUTAS
+//RUTASsad
 const ruta_raspi = "/var/www/html/raspi"
 const ruta_actualizacion = ruta_raspi + "/util/actualizacion/"
 
